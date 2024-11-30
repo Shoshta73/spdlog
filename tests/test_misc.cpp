@@ -206,7 +206,7 @@ TEST_CASE("os::fwrite_bytes", "[os]") {
     const char* filename = "log_tests/test_fwrite_bytes.txt";
     const char *msg = "hello";
     prepare_logdir();
-    REQUIRE(create_dir("log_tests"));
+    REQUIRE(create_dir("log_tests") == true);
     {
         auto_closer closer(std::fopen(filename, "wb"));
         REQUIRE(closer.fp != nullptr);
