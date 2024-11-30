@@ -249,6 +249,7 @@ else ()
 endif()
 if(HAVE_FWRITE_UNLOCKED)
     target_compile_definitions(spdlog PRIVATE SPDLOG_FWRITE_UNLOCKED)
+    target_compile_definitions(spdlog_header_only INTERFACE SPDLOG_FWRITE_UNLOCKED)
 endif()
 
 # ---------------------------------------------------------------------------------------
