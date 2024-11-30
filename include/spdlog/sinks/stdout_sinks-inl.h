@@ -10,6 +10,7 @@
 #include <memory>
 #include <spdlog/details/console_globals.h>
 #include <spdlog/pattern_formatter.h>
+#include <spdlog/details/os.h>
 
 #ifdef _WIN32
     // under windows using fwrite to non-binary stream results in \r\r\n (see issue #1675)
@@ -67,7 +68,7 @@ SPDLOG_INLINE void stdout_sink_base<ConsoleMutex>::log(const details::log_msg &m
     std::lock_guard<mutex_t> lock(mutex_);
     memory_buf_t formatted;
     formatter_->format(msg, formatted);
-    ::fwrite(formatted.data(), sizeof(char), formatted.size(), file_);
+    details::os::fwrite_bytes(formatted.data(), formatted.size(), file_);
 #endif                // WIN32
     ::fflush(file_);  // flush every line to terminal
 }
